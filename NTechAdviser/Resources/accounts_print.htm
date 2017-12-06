@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<style>
+		#titleText
+        {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+            font-family: Calibri;
+            font-weight: bold;
+            font-size: 28px;
+        }
+        #headerRow
+        {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+            font-family: Calibri;
+            font-weight: bold;
+            font-size: 12;
+        }
+        td
+        {
+            border: 1px solid black;
+            padding: 5px;
+            font-family: Calibri;
+            font-weight: normal;
+            font-size: 10;
+        }
+		table { border-collapse: collapse; border: 1px solid black;}
+		#Debit {text-align: right;}
+		#Credit {text-align: right;}
+		#PendingDebit {text-align: right;}
+		#PendingCredit {text-align: right;}
+		#Project {width: 200px;}
+		#Particulars {width: 200px;}
+		</style>
+        <title>##TitleText##</title>
+	</head>
+	<body>
+		<table id="contentTable">
+			<tr><td id="titleText" colspan="25">##TitleText##</td></tr>
+			##textContentForPrint##
+		</table>
+	</body>
+</html>

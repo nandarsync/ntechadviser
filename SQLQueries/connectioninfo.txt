@@ -1,0 +1,8 @@
+Host
+mi3-wdb2.a2hosting.com
+Database name
+nandarte_ntechadviser
+User name
+nandarte_admin
+
+Server=mi3-wdb2.a2hosting.com;Database=nandarte_ntechadviser;User Id=nandarte_admin;Password=Welcome#123;

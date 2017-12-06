@@ -1,0 +1,3 @@
+﻿<tr id="tableHeadTitleRow">
+	<H2 id="title">This is a sample text</H2>
+</tr>
