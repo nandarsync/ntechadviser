@@ -43,21 +43,22 @@
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 24);
+            this.webBrowser1.Location = new System.Drawing.Point(0, 26);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(774, 440);
+            this.webBrowser1.Size = new System.Drawing.Size(774, 438);
             this.webBrowser1.TabIndex = 0;
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.printOptionsToolStripMenuItem,
             this.printToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(774, 26);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -66,13 +67,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pageSetupToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(43, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // pageSetupToolStripMenuItem
             // 
             this.pageSetupToolStripMenuItem.Name = "pageSetupToolStripMenuItem";
-            this.pageSetupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pageSetupToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.pageSetupToolStripMenuItem.Text = "Close";
             this.pageSetupToolStripMenuItem.Click += new System.EventHandler(this.pageSetupToolStripMenuItem_Click);
             // 
@@ -83,34 +84,34 @@
             this.printPreviewToolStripMenuItem,
             this.printToolStripMenuItem});
             this.printOptionsToolStripMenuItem.Name = "printOptionsToolStripMenuItem";
-            this.printOptionsToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.printOptionsToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.printOptionsToolStripMenuItem.Text = "Print Options";
             // 
             // pageSetupToolStripMenuItem1
             // 
             this.pageSetupToolStripMenuItem1.Name = "pageSetupToolStripMenuItem1";
-            this.pageSetupToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.pageSetupToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.pageSetupToolStripMenuItem1.Text = "Page Setup";
             this.pageSetupToolStripMenuItem1.Click += new System.EventHandler(this.pageSetupToolStripMenuItem1_Click);
             // 
             // printPreviewToolStripMenuItem
             // 
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Preview";
             this.printPreviewToolStripMenuItem.Click += new System.EventHandler(this.printPreviewToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem1
             // 
             this.printToolStripMenuItem1.Name = "printToolStripMenuItem1";
-            this.printToolStripMenuItem1.Size = new System.Drawing.Size(44, 20);
+            this.printToolStripMenuItem1.Size = new System.Drawing.Size(50, 22);
             this.printToolStripMenuItem1.Text = "Print";
             this.printToolStripMenuItem1.Click += new System.EventHandler(this.printToolStripMenuItem1_Click);
             // 

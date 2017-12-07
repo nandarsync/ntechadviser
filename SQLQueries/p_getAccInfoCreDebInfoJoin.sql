@@ -1,7 +1,7 @@
-USE [nandarte_ntechadviser]
+USE [nandarte_ntechadviser1]
 GO
 
-/****** Object:  StoredProcedure [dbo].[p_getAccInfoCreDebInfoJoin]    Script Date: 12/11/2017 16:48:18 ******/
+/****** Object:  StoredProcedure [dbo].[p_getAccInfoCreDebInfoJoin]    Script Date: 08/12/2017 00:27:53 ******/
 SET ANSI_NULLS ON
 GO
 

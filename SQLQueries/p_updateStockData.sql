@@ -1,12 +1,16 @@
-USE [nandarte_ntechadviser]
+USE [nandarte_ntechadviser1]
 GO
 
-/****** Object:  StoredProcedure [dbo].[p_updateStockData]    Script Date: 12/11/2017 16:50:10 ******/
+/****** Object:  StoredProcedure [dbo].[p_updateStockData]    Script Date: 08/12/2017 00:28:32 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
+
 
 
 
@@ -22,9 +26,15 @@ CREATE PROCEDURE [dbo].[p_updateStockData]
 	@Project nvarchar(50),
 	@Particulars nvarchar(150),
 	@UpdatedBy nvarchar(50),
+	@UpdatedDate date,
 	@Item nvarchar(50),
-	@UnitsIn float,
-	@UnitsOut float,
+	@SlipNo nvarchar(150),
+	@InwardBillNo nvarchar(150),
+	@Volume nvarchar(150),
+	@QuantityIn float,
+	@QuantityOut float,
+	@Reference nvarchar(300),
+	@ItemSize nvarchar(50),
 	@VehicleNo nvarchar(50),
 	@Credit money,
 	@Debit money,
@@ -34,9 +44,13 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	UPDATE stock_info SET Project=@Project, 
-	Particulars=@Particulars, UpdatedBy=@UpdatedBy, Item=@Item, UnitsIn=@UnitsIn, @UnitsOut=@UnitsOut, VehicleNo=@VehicleNo, DateUpdated=GETDATE(), Debit=@Debit, Credit=@Credit, Details=@Details, Tag=@Tag WHERE
+	Particulars=@Particulars, UpdatedBy=@UpdatedBy, Item=@Item, SlipNo=@SlipNo, InwardBillNo=@InwardBillNo, Volume=@Volume, Reference=@Reference, QuantityIn=@QuantityIn, QuantityOut=@QuantityOut, ItemSize=@ItemSize, VehicleNo=@VehicleNo, DateUpdated=@UpdatedDate, Debit=@Debit, Credit=@Credit, Details=@Details, Tag=@Tag WHERE
 	RecordID=@RecordID;
 END
+
+
+
+
 
 GO
 

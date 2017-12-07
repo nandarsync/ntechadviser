@@ -39,6 +39,19 @@ namespace NTechAdviser.Forms
             }
 
             DataSet ds = utils.GetManagementInfoDataSet(query);
+            string[] columnsOrder = File.ReadAllLines("stock_info_column_order.txt");
+            if (columnsOrder != null && columnsOrder.Length > 1)
+            {
+                try
+                {
+                    utils.SetColumnsOrder(ds, columnsOrder);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Failed to order columns.", ex);
+                }
+            }
+
             this.dataGridViewSearch.DataSource = ds.Tables[0];
         }
 
@@ -46,14 +59,27 @@ namespace NTechAdviser.Forms
         {
             try
             {
-                string cmdString = "select * from stock_info";
+                string cmdString = "select * from stock_info order by DateCreated";
                 Utilities utils = new Utilities();
                 DataSet ds = utils.GetManagementInfoDataSet(cmdString);
+                string[] columnsOrder = File.ReadAllLines("stock_info_column_order.txt");
+                if (columnsOrder != null && columnsOrder.Length > 1)
+                {
+                    try
+                    {
+                        utils.SetColumnsOrder(ds, columnsOrder);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to order columns.", ex);
+                    }
+                }
                 this.dataGridViewSearch.DataSource = ds.Tables[0];
             }
             catch (Exception ex)
             {
                 log.Error("Error during search all.", ex);
+                MessageBox.Show("Search All is not successful", "Search All Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -79,22 +105,18 @@ namespace NTechAdviser.Forms
             stockInfo.RecordID = GetValueOrNullForInt(row, "RecordID");
             stockInfo.CreatedBy = GetValueOrNullForString(row, "CreatedBy");
             stockInfo.UpdatedBy = GetValueOrNullForString(row, "UpdatedBy");
-            stockInfo.DateCreated = GetValueOrNullForString(row, "DateCreated").TrimEnd("00:00:00".ToCharArray()).Trim();
-            stockInfo.DateUpdated = GetValueOrNullForString(row, "DateUpdated").TrimEnd("00:00:00".ToCharArray()).Trim();
+            stockInfo.DateCreated = GetValueOrNullForString(row, "DateCreated");
+            stockInfo.DateUpdated = GetValueOrNullForString(row, "DateUpdated");
             stockInfo.ProjectName = GetValueOrNullForString(row, "Project");
             stockInfo.Particulars = GetValueOrNullForString(row, "Particulars");
             stockInfo.SlipNo = GetValueOrNullForString(row, "SlipNo");
             stockInfo.InwardBillNo = GetValueOrNullForString(row, "InwardBillNo");
             stockInfo.Volume = GetValueOrNullForString(row, "Volume");
             stockInfo.Item = GetValueOrNullForString(row, "Item");
-            stockInfo.UnitsIn = GetValueOrNullForDecimal(row, "UnitsIn");
-            stockInfo.UnitsOut = GetValueOrNullForDecimal(row, "UnitsOut");
+            stockInfo.ItemSize = GetValueOrNullForString(row, "ItemSize");
+            stockInfo.QuantityIn = GetValueOrNullForDecimal(row, "QuantityIn");
+            stockInfo.QuantityOut = GetValueOrNullForDecimal(row, "QuantityOut");
             stockInfo.VehicleNo = GetValueOrNullForString(row, "VehicleNo");
-            stockInfo.PayMode = GetValueOrNullForString(row, "PayMode");
-            stockInfo.BankDetails = GetValueOrNullForString(row, "BankDetails");
-            stockInfo.PayModeReference = GetValueOrNullForString(row, "PayModeReference");
-            stockInfo.Debit = GetValueOrNullForDecimal(row, "Debit");
-            stockInfo.Credit = GetValueOrNullForDecimal(row, "Credit");
             stockInfo.Details = GetValueOrNullForString(row, "Details");
             stockInfo.Tag = GetValueOrNullForString(row, "Tag");
 
@@ -119,6 +141,7 @@ namespace NTechAdviser.Forms
                 }
             }
 
+            List<int> errorRecords = new List<int>();
             int i = 0;
             foreach (StockInfo stockInfo in stockInfoColl)
             {
@@ -129,29 +152,26 @@ namespace NTechAdviser.Forms
                 }
                 catch (Exception ex)
                 {
+                    errorRecords.Add(i);
+                    log.Info(string.Format("Problem with updating record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", stockInfo.ProjectName, stockInfo.Particulars, stockInfo.PayMode, stockInfo.PayModeReference));
                     if (!silent)
                     {
-                        log.Info(string.Format("Problem with updating record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", stockInfo.ProjectName, stockInfo.Particulars, stockInfo.PayMode, stockInfo.PayModeReference));
                         MessageBox.Show(string.Format("Problem with updating record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", stockInfo.ProjectName, stockInfo.Particulars, stockInfo.PayMode, stockInfo.PayModeReference), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-
                     }
                 }
             }
 
-            if (i != 0)
+            if (errorRecords.Count <= 0)
             {
+                log.Info("All data updated successfully.");
                 if (!silent)
                 {
-                    log.Info("All data updated successfully.");
                     MessageBox.Show("All data updated successfully.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
-                {
-
-                }
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Records with index {0} has failed. Remaining got updated.", string.Join(",", errorRecords)), "Update Stock Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -251,13 +271,17 @@ namespace NTechAdviser.Forms
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.Item + "</td>");
                     }
-                    else if (str.Equals("UnitsIn", StringComparison.InvariantCultureIgnoreCase))
+                    else if (str.Equals("ItemSize", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.UnitsIn + "</td>");
+                        rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.ItemSize + "</td>");
                     }
-                    else if (str.Equals("UnitsOut", StringComparison.InvariantCultureIgnoreCase))
+                    else if (str.Equals("QuantityIn", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.UnitsOut + "</td>");
+                        rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.QuantityIn + "</td>");
+                    }
+                    else if (str.Equals("QuantityOut", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.QuantityOut + "</td>");
                     }
                     else if (str.Equals("VehicleNo", StringComparison.InvariantCultureIgnoreCase))
                     {
@@ -315,10 +339,12 @@ namespace NTechAdviser.Forms
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.Tag + "</td>");
                     }
-                    else if (str.Equals("StockCargoID", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + string.Empty + "</td>");
-                    }
+
+                    //Not required any more.
+                    //else if (str.Equals("StockCargoID", StringComparison.InvariantCultureIgnoreCase))
+                    //{
+                    //    rowString = rowString + ("<td id=\"" + str + "\">" + string.Empty + "</td>");
+                    //}
                 }
                 tableCellsForBody.Add("<tr>" + rowString + "</tr>");
             }

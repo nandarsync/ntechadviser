@@ -87,7 +87,7 @@
             this.panel1.Controls.Add(this.lblParticulars);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Location = new System.Drawing.Point(0, 26);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(796, 121);
             this.panel1.TabIndex = 2;
@@ -150,11 +150,12 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(796, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(796, 26);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -163,13 +164,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(43, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -177,9 +178,9 @@
             // 
             this.panel2.Controls.Add(this.dataGridViewSearch);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 145);
+            this.panel2.Location = new System.Drawing.Point(0, 147);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(796, 431);
+            this.panel2.Size = new System.Drawing.Size(796, 429);
             this.panel2.TabIndex = 4;
             // 
             // dataGridViewSearch
@@ -213,27 +214,27 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewSearch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewSearch.Size = new System.Drawing.Size(796, 431);
+            this.dataGridViewSearch.Size = new System.Drawing.Size(796, 429);
             this.dataGridViewSearch.TabIndex = 0;
             this.dataGridViewSearch.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSearch_CellEndEdit);
             // 
             // contextMenuGridview
             // 
+            this.contextMenuGridview.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contextMenuGridview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.updateDataToolStripMenuItem});
             this.contextMenuGridview.Name = "contextMenuGridview";
-            this.contextMenuGridview.Size = new System.Drawing.Size(137, 26);
+            this.contextMenuGridview.Size = new System.Drawing.Size(153, 48);
             // 
             // updateDataToolStripMenuItem
             // 
             this.updateDataToolStripMenuItem.Name = "updateDataToolStripMenuItem";
-            this.updateDataToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.updateDataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.updateDataToolStripMenuItem.Text = "UpdateData";
             this.updateDataToolStripMenuItem.Click += new System.EventHandler(this.updateDataToolStripMenuItem_Click);
             // 
             // StockSearchForm
             // 
-            this.AcceptButton = this.btnSearchAll;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 576);

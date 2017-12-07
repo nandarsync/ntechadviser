@@ -29,12 +29,43 @@ namespace NTechAdviser.Forms
                 {
                     MessageBox.Show("Project and Particular should not be empty.", "Save?", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                Utilities utils = new Utilities();
                 CreditDebitInfo credDebtInfo = new CreditDebitInfo();
                 credDebtInfo.Project = txtBoxProject.Text;
                 credDebtInfo.Particulars = txtBoxParticular.Text;
-                credDebtInfo.Credit = string.IsNullOrEmpty(txtBoxCredit.Text) ? 0 : Convert.ToInt32(txtBoxCredit.Text);
-                credDebtInfo.Debit = string.IsNullOrEmpty(txtBoxDebit.Text) ? 0 : Convert.ToInt32(txtBoxDebit.Text);
-                Utilities utils = new Utilities();
+                credDebtInfo.Credit = string.IsNullOrEmpty(txtBoxCredit.Text) ? 0 : Convert.ToDecimal(txtBoxCredit.Text);
+                credDebtInfo.Debit = string.IsNullOrEmpty(txtBoxDebit.Text) ? 0 : Convert.ToDecimal(txtBoxDebit.Text);
+
+                //CreatedBy and UpdatedBy.
+                credDebtInfo.CreatedBy = ApplicationContext.UserName;
+                credDebtInfo.LastUpdatedBy = ApplicationContext.UserName;
+
+                //CreatedDate and UpdatedDate.
+                string createdDate = datePickerDate.Text;
+                string updatedDate = string.Empty;
+                if (string.IsNullOrEmpty(createdDate))
+                {
+                    createdDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime inputVal = Convert.ToDateTime(createdDate);
+                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                }
+                if (string.IsNullOrEmpty(updatedDate))
+                {
+                    updatedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime inputVal = Convert.ToDateTime(updatedDate);
+                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                }
+
+                createdDate = utils.ValidateDate(createdDate);
+                updatedDate = utils.ValidateDate(updatedDate);
+                credDebtInfo.CreatedDate = createdDate;
+                credDebtInfo.LastUpdatedDate = updatedDate;
                 utils.AddCreditDebitInfo(credDebtInfo);
             }
             catch (Exception ex)
@@ -82,7 +113,7 @@ namespace NTechAdviser.Forms
                 }
                 else
                 {
-                    resultVal.Sort((x, y) => x.LastUpdatedDate.CompareTo(y.LastUpdatedDate));
+                    resultVal.Sort((x, y) => x.CreatedDate.CompareTo(y.CreatedDate));
                     SetupDataGridView();
                     dataGridViewDebitReview.DataSource = resultVal;
                     DoCalculation(resultVal);
@@ -391,7 +422,7 @@ namespace NTechAdviser.Forms
                 DataSet ds = utils.GetCreditDebitInfo();
                 List<CreditDebitInfo> creditDebitInfoColl = GetCreditDebitInfoColl(ds);
 
-                creditDebitInfoColl.Sort((x, y) => x.LastUpdatedDate.CompareTo(y.LastUpdatedDate));
+                creditDebitInfoColl.Sort((x, y) => x.CreatedDate.CompareTo(y.CreatedDate));
 
                 SetupDataGridView();
                 dataGridViewDebitReview.DataSource = creditDebitInfoColl;

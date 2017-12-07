@@ -1,7 +1,7 @@
-USE [info_management]
+USE [nandarte_ntechadviser1]
 GO
 
-/****** Object:  Table [dbo].[stock_info]    Script Date: 12/11/2017 16:45:41 ******/
+/****** Object:  Table [dbo].[stock_info]    Script Date: 08/12/2017 00:24:49 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,20 +16,17 @@ CREATE TABLE [dbo].[stock_info](
 	[UpdatedBy] [nvarchar](50) NULL,
 	[Project] [nvarchar](50) NULL,
 	[Particulars] [nvarchar](150) NULL,
+	[SlipNo] [nvarchar](150) NULL,
+	[InwardBillNo] [nvarchar](150) NULL,
+	[Volume] [nvarchar](150) NULL,
 	[Item] [nvarchar](50) NULL,
-	[UnitsIn] [float] NULL,
-	[UnitsOut] [float] NULL,
+	[QuantityIn] [float] NULL,
+	[QuantityOut] [float] NULL,
+	[ItemSize] [nvarchar](50) NULL,
 	[VehicleNo] [nvarchar](50) NULL,
-	[PayMode] [nvarchar](50) NULL,
-	[PayModeReference] [nvarchar](100) NULL,
-	[BankDetails] [nvarchar](50) NULL,
-	[Debit] [money] NULL,
-	[Credit] [money] NULL,
-	[PendingDebit] [money] NULL,
-	[PendingCredit] [money] NULL,
 	[Details] [nvarchar](300) NULL,
 	[Tag] [nvarchar](300) NULL,
-	[StockCargoID] [bigint] NULL,
+	[Reference] [nvarchar](300) NULL,
  CONSTRAINT [PK_stock_info] PRIMARY KEY CLUSTERED 
 (
 	[RecordID] ASC

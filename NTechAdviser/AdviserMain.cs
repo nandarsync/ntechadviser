@@ -10,6 +10,7 @@ using NTechAdviser.Forms;
 using log4net;
 using System.Reflection;
 using System.Configuration;
+using System.IO;
 
 namespace NTechAdviser
 {
@@ -59,7 +60,8 @@ namespace NTechAdviser
             Utilities utils = new Utilities();
             utils.UpdateCacheData();
 
-            //this.lblCompanyName.Text = ConfigurationManager.AppSettings["CompanyName"];
+            string appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+            this.webBrowser1.Url = new Uri(Path.Combine(appDir, @"frontpage.htm"));
             ApplicationContext.AdminKeyForUpdate = utils.GetUnlockKeyData();
             ApplicationContext.CanContinue = false;
 
@@ -219,6 +221,11 @@ namespace NTechAdviser
         }
 
         private void panelLogin_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }

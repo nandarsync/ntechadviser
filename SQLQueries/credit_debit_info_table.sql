@@ -1,7 +1,7 @@
-USE [info_management]
+USE [nandarte_ntechadviser1]
 GO
 
-/****** Object:  Table [dbo].[credit_debit_info]    Script Date: 12/11/2017 16:44:49 ******/
+/****** Object:  Table [dbo].[credit_debit_info]    Script Date: 08/12/2017 00:23:52 ******/
 SET ANSI_NULLS ON
 GO
 

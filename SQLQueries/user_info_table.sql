@@ -1,7 +1,7 @@
-USE [info_management]
+USE [nandarte_ntechadviser1]
 GO
 
-/****** Object:  Table [dbo].[user_info]    Script Date: 12/11/2017 16:45:54 ******/
+/****** Object:  Table [dbo].[user_info]    Script Date: 08/12/2017 00:25:07 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,6 +10,7 @@ GO
 
 CREATE TABLE [dbo].[user_info](
 	[UserID] [int] IDENTITY(1000,1) NOT NULL,
+	[UserName] [nvarchar](50) NULL,
 	[UserEmail] [nvarchar](50) NULL,
 	[Type] [int] NULL,
 	[Password] [nvarchar](50) NULL,

@@ -7,9 +7,13 @@ using System.Data;
 using NTechAdviser.Forms;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using System.Globalization;
 
 namespace NTechAdviser
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Utilities
     {
         log4net.ILog log = log4net.LogManager.GetLogger(typeof(Utilities));
@@ -194,7 +198,7 @@ namespace NTechAdviser
         /// <param name="details">The details.</param>
         /// <param name="tag">The tag.</param>
         /// <returns></returns>
-        public int ExecuteAddAccountsData(string projectName, string particulars, string paymentMode, string bankDetails, string payModeRef, decimal debit, decimal credit, decimal pendingDebit, decimal pendingCredit, string details, string tag)
+        public int ExecuteAddAccountsData(string projectName, string particulars, string paymentMode, string bankDetails, string payModeRef, decimal debit, decimal credit, decimal pendingDebit, decimal pendingCredit, string createdBy, string updatedBy, string details, string tag, string createdDate, string updatedDate)
         {
             int retVal = 0;
             try
@@ -214,8 +218,12 @@ namespace NTechAdviser
                 cmd.Parameters.Add("@Credit", SqlDbType.Money).Value = credit;
                 cmd.Parameters.Add("@PendingDebit", SqlDbType.Money).Value = pendingDebit;
                 cmd.Parameters.Add("@PendingCredit", SqlDbType.Money).Value = pendingCredit;
+                cmd.Parameters.Add("@CreatedBy", SqlDbType.Text).Value = createdBy;
+                cmd.Parameters.Add("@UpdatedBy", SqlDbType.Text).Value = updatedBy;
                 cmd.Parameters.Add("@Details", SqlDbType.Text).Value = details;
                 cmd.Parameters.Add("@Tag", SqlDbType.Text).Value = tag;
+                cmd.Parameters.Add("@DateCreated", SqlDbType.Date).Value = createdDate;
+                cmd.Parameters.Add("@DateUpdated", SqlDbType.Date).Value = updatedDate;
 
                 conn.Open();
                 retVal = cmd.ExecuteNonQuery();
@@ -226,10 +234,39 @@ namespace NTechAdviser
             catch (Exception ex)
             {
                 log.Error("Error when adding Accounts data.", ex);
+                throw ex;
             }
             return retVal;
         }
 
+        /// <summary>
+        /// Validates the date.
+        /// </summary>
+        /// <param name="inputDate">The input date.</param>
+        /// <returns></returns>
+        public string ValidateDate(string inputDate)
+        {
+            string retVal = inputDate;
+            try
+            {
+                DateTime dateValue;
+                if (DateTime.TryParseExact(inputDate, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out dateValue))
+                {
+                    return dateValue.ToString("yyyy-MM-dd");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return retVal;
+        }
+
+        /// <summary>
+        /// Adds the unlock key data.
+        /// </summary>
+        /// <param name="adminUserKey">The admin user key.</param>
+        /// <returns></returns>
         public int AddUnlockKeyData(string adminUserKey)
         {
             int retVal = 0;
@@ -257,6 +294,23 @@ namespace NTechAdviser
         }
 
         /// <summary>
+        /// Sets the columns order.
+        /// </summary>
+        /// <param name="ds">The ds.</param>
+        /// <param name="columnNames">The column names.</param>
+        public void SetColumnsOrder(DataSet ds, params String[] columnNames)
+        {
+            DataTable table = ds.Tables[0];
+            int columnIndex = 0;
+            foreach (var columnName in columnNames)
+            {
+                table.Columns[columnName].SetOrdinal(columnIndex);
+                columnIndex++;
+            }
+            ds.AcceptChanges();
+        }
+
+        /// <summary>
         /// Executes the add stock data.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
@@ -276,7 +330,7 @@ namespace NTechAdviser
         /// <param name="details">The details.</param>
         /// <param name="tag">The tag.</param>
         /// <returns></returns>
-        public int ExecuteAddStockData(string projectName, string particulars, string paymentMode, string bankDetails, string payModeRef, string slipNo, string inwardBillNo, string volume, decimal debit, decimal credit, string item, decimal unitsIn, decimal unitsOut, string vehicleNo, string details, string tag)
+        public int ExecuteAddStockData(string projectName, string particulars, string paymentMode, string bankDetails, string payModeRef, string slipNo, string inwardBillNo, string volume, decimal debit, decimal credit, string item, decimal quantityIn, decimal quantityOut, string reference, string itemSize, string vehicleNo, string details, string tag, string createdBy, string updatedBy, string createdDate, string updatedDate)
         {
             int retVal = 0;
             try
@@ -291,13 +345,23 @@ namespace NTechAdviser
                 cmd.Parameters.Add("@Particulars", SqlDbType.Text).Value = particulars;
 
                 cmd.Parameters.Add("@Item", SqlDbType.Text).Value = item;
-                cmd.Parameters.Add("@UnitsIn", SqlDbType.Float).Value = unitsIn;
-                cmd.Parameters.Add("@UnitsOut", SqlDbType.Float).Value = unitsOut;
+                cmd.Parameters.Add("@QuantityIn", SqlDbType.Float).Value = quantityIn;
+                cmd.Parameters.Add("@QuantityOut", SqlDbType.Float).Value = quantityOut;
+                cmd.Parameters.Add("@Reference", SqlDbType.Text).Value = reference;
+
+                cmd.Parameters.Add("@ItemSize", SqlDbType.Text).Value = itemSize;
                 cmd.Parameters.Add("@VehicleNo", SqlDbType.Text).Value = vehicleNo;
 
                 cmd.Parameters.Add("@SlipNo", SqlDbType.Text).Value = slipNo;
                 cmd.Parameters.Add("@InwardBillNo", SqlDbType.Text).Value = inwardBillNo;
                 cmd.Parameters.Add("@Volume", SqlDbType.Text).Value = volume;
+
+
+                cmd.Parameters.Add("@CreatedBy", SqlDbType.Text).Value = createdBy;
+                cmd.Parameters.Add("@UpdatedBy", SqlDbType.Text).Value = updatedBy;
+                cmd.Parameters.Add("@CreatedDate", SqlDbType.Date).Value = createdDate;
+                cmd.Parameters.Add("@UpdatedDate", SqlDbType.Date).Value = updatedDate;
+
 
                 cmd.Parameters.Add("@PayMode", SqlDbType.Text).Value = paymentMode;
                 cmd.Parameters.Add("@BankDetails", SqlDbType.Text).Value = bankDetails;
@@ -315,6 +379,7 @@ namespace NTechAdviser
             }
             catch (Exception ex)
             {
+                MessageBox.Show(string.Format("Error when adding Stock Data for the record - Project Name - {0}, Particular - {1}, Item - {2}, SlipNo - {3}", projectName, particulars, item, slipNo), "Add Stock Failed for Record", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 log.Error("Error when adding Accounts data.", ex);
             }
             return retVal;
@@ -330,7 +395,7 @@ namespace NTechAdviser
             int retVal = 0;
             try
             {
-                string cmdText = string.Format("Update accounts_info set DateUpdated=GETDATE(), Project='{0}', Particulars='{1}', Debit={2}, Credit={3}, Details='{4}', Tag='{5}', PayMode='{6}', PayModeReference='{7}' where accounts_info.RecordID={8}",
+                string cmdText = string.Format("Update accounts_info set DateUpdated=GETDATE(), Project='{0}', Particulars='{1}', Debit={2}, Credit={3}, Details='{4}', Tag='{5}', PayMode='{6}', PayModeReference='{7}', UpdatedBy='{8}', DateUpdated='{9}' where accounts_info.RecordID={10}",
                     accInfo.ProjectName,
                     accInfo.Particulars,
                     accInfo.Debit,
@@ -339,6 +404,8 @@ namespace NTechAdviser
                     accInfo.Tag,
                     accInfo.PayMode,
                     accInfo.PayModeReference,
+                    accInfo.UpdatedBy,
+                    accInfo.UpdatedDate,
                     accInfo.RecordID
                     );
                 var connection = System.Configuration.ConfigurationManager.ConnectionStrings["info_managementConnectionString"].ConnectionString;
@@ -355,6 +422,7 @@ namespace NTechAdviser
             catch (Exception ex)
             {
                 log.Error("Error when updating Accounts data.", ex);
+                throw ex;
             }
             return retVal;
         }
@@ -369,7 +437,7 @@ namespace NTechAdviser
             int retVal = 0;
             try
             {
-                string cmdText = string.Format("delete from accounts_info where accounts_info.RecordID={0}",accInfo.RecordID);
+                string cmdText = string.Format("delete from accounts_info where accounts_info.RecordID={0}", accInfo.RecordID);
                 var connection = System.Configuration.ConfigurationManager.ConnectionStrings["info_managementConnectionString"].ConnectionString;
                 SqlConnection conn = new SqlConnection(connection.ToString());
                 SqlCommand cmd = new SqlCommand(cmdText, conn);
@@ -409,6 +477,10 @@ namespace NTechAdviser
                 cmd.Parameters.Add("@Particulars", SqlDbType.Text).Value = creDebInfo.Particulars;
                 cmd.Parameters.Add("@CreatedBy", SqlDbType.Text).Value = creDebInfo.CreatedBy;
                 cmd.Parameters.Add("@UpdatedBy", SqlDbType.Text).Value = creDebInfo.LastUpdatedBy;
+
+                cmd.Parameters.Add("@DateCreated", SqlDbType.Date).Value = creDebInfo.CreatedDate;
+                cmd.Parameters.Add("@DateUpdated", SqlDbType.Date).Value = creDebInfo.LastUpdatedDate;
+
                 cmd.Parameters.Add("@Debit", SqlDbType.Money).Value = creDebInfo.Debit;
                 cmd.Parameters.Add("@Credit", SqlDbType.Money).Value = creDebInfo.Credit;
                 cmd.Parameters.Add("@Details", SqlDbType.Text).Value = creDebInfo.Details;
@@ -422,6 +494,7 @@ namespace NTechAdviser
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Error when adding data. Please refer to log for more details.", "Add Credit Debit Info Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 log.Error("Error when adding Accounts data.", ex);
             }
             return retVal;
@@ -441,6 +514,7 @@ namespace NTechAdviser
                 cmd.Parameters.Add("@Project", SqlDbType.Text).Value = creDebInfo.Project;
                 cmd.Parameters.Add("@Particulars", SqlDbType.Text).Value = creDebInfo.Particulars;
                 cmd.Parameters.Add("@UpdatedBy", SqlDbType.Text).Value = creDebInfo.LastUpdatedBy;
+                cmd.Parameters.Add("@UpdatedDate", SqlDbType.Date).Value = creDebInfo.LastUpdatedDate;
                 cmd.Parameters.Add("@Debit", SqlDbType.Money).Value = creDebInfo.Debit;
                 cmd.Parameters.Add("@Credit", SqlDbType.Money).Value = creDebInfo.Credit;
                 cmd.Parameters.Add("@Details", SqlDbType.Text).Value = creDebInfo.Details;
@@ -455,6 +529,7 @@ namespace NTechAdviser
             catch (Exception ex)
             {
                 log.Error("Error when adding Accounts data.", ex);
+                throw ex;
             }
             return retVal;
         }
@@ -504,11 +579,14 @@ namespace NTechAdviser
                 cmd.Parameters.Add("@SlipNo", SqlDbType.Text).Value = stockInfo.SlipNo;
                 cmd.Parameters.Add("@InwardBillNo", SqlDbType.Text).Value = stockInfo.InwardBillNo;
                 cmd.Parameters.Add("@Volume", SqlDbType.Text).Value = stockInfo.Volume;
-                
-                cmd.Parameters.Add("@UnitsIn", SqlDbType.Float).Value = stockInfo.UnitsIn;
-                cmd.Parameters.Add("@UnitsOut", SqlDbType.Float).Value = stockInfo.UnitsOut;
+                cmd.Parameters.Add("@ItemSize", SqlDbType.Text).Value = stockInfo.ItemSize;
+                cmd.Parameters.Add("@Reference", SqlDbType.Text).Value = stockInfo.Reference;
+
+                cmd.Parameters.Add("@QuantityIn", SqlDbType.Float).Value = stockInfo.QuantityIn;
+                cmd.Parameters.Add("@QuantityOut", SqlDbType.Float).Value = stockInfo.QuantityOut;
                 cmd.Parameters.Add("@VehicleNo", SqlDbType.Text).Value = stockInfo.VehicleNo;
                 cmd.Parameters.Add("@UpdatedBy", SqlDbType.Text).Value = stockInfo.UpdatedBy;
+                cmd.Parameters.Add("@UpdatedDate", SqlDbType.Date).Value = stockInfo.DateUpdated;
                 cmd.Parameters.Add("@Debit", SqlDbType.Money).Value = stockInfo.Debit;
                 cmd.Parameters.Add("@Credit", SqlDbType.Money).Value = stockInfo.Credit;
                 cmd.Parameters.Add("@Details", SqlDbType.Text).Value = stockInfo.Details;
@@ -523,6 +601,7 @@ namespace NTechAdviser
             catch (Exception ex)
             {
                 log.Error("Error when adding Accounts data.", ex);
+                throw ex;
             }
             return retVal;
         }

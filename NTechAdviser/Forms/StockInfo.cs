@@ -47,14 +47,13 @@ namespace NTechAdviser.Forms
         public string Item
         { get; set; }
 
-
         /// <summary>
-        /// Gets or sets the units.
+        /// Gets or sets the size of the item.
         /// </summary>
         /// <value>
-        /// The units.
+        /// The size of the item.
         /// </value>
-        public Decimal UnitsIn
+        public string ItemSize
         { get; set; }
 
         /// <summary>
@@ -63,7 +62,25 @@ namespace NTechAdviser.Forms
         /// <value>
         /// The units.
         /// </value>
-        public Decimal UnitsOut
+        public Decimal QuantityIn
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the units.
+        /// </summary>
+        /// <value>
+        /// The units.
+        /// </value>
+        public Decimal QuantityOut
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reference.
+        /// </summary>
+        /// <value>
+        /// The reference.
+        /// </value>
+        public string Reference
         { get; set; }
 
         /// <summary>
@@ -210,8 +227,9 @@ namespace NTechAdviser.Forms
             ProjectName = string.Empty;
             Particulars = string.Empty;
             Item = string.Empty;
-            UnitsIn = 0;
-            UnitsOut = 0;
+            ItemSize = string.Empty;
+            QuantityIn = 0;
+            QuantityOut = 0;
             SlipNo = string.Empty;
             InwardBillNo = string.Empty;
             Volume = string.Empty;
