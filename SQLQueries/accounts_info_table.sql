@@ -1,4 +1,4 @@
-USE [info_management]
+USE [nandarte_ntechadviser1]
 GO
 
 /****** Object:  Table [dbo].[accounts_info]    Script Date: 08/12/2017 00:22:32 ******/

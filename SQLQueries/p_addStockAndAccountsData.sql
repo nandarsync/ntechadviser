@@ -1,4 +1,4 @@
-USE [info_management]
+USE [nandarte_ntechadviser1]
 GO
 
 /****** Object:  StoredProcedure [dbo].[p_addStockAndAccountsData]    Script Date: 08/12/2017 00:26:52 ******/

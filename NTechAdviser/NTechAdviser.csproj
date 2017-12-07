@@ -251,6 +251,9 @@
     <Content Include="creditdebit_info_column_order.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="frontpage.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="stock_info_column_order.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
