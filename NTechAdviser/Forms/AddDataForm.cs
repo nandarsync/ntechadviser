@@ -12,7 +12,7 @@ namespace NTechAdviser.Forms
 {
     public partial class StockAddForm : Form
     {
-        log4net.ILog log = log4net.LogManager.GetLogger(typeof(StockAddForm)); 
+        log4net.ILog log = log4net.LogManager.GetLogger(typeof(StockAddForm));
         public StockAddForm()
         {
             InitializeComponent();
@@ -37,11 +37,52 @@ namespace NTechAdviser.Forms
                 accountsInfo.PayModeReference = GetValueOrNullForString(row, "columnPayModeReference");
                 accountsInfo.Debit = GetValueOrNullForDecimal(row, "columnDebit");
                 accountsInfo.Credit = GetValueOrNullForDecimal(row, "columnCredit");
-                accountsInfo.PendingDebit = 0;
-                accountsInfo.PendingCredit = 0;
+                accountsInfo.PendingDebit = GetValueOrNullForDecimal(row, "columnPendingDebit");
+                accountsInfo.PendingCredit = GetValueOrNullForDecimal(row, "columnPendingCredit");
+
+                //CreatedBy and UpdatedBy.
+                accountsInfo.CreatedBy = ApplicationContext.UserName;
+                accountsInfo.UpdatedBy = ApplicationContext.UserName;
+
+                //CreatedDate and UpdatedDate.
+                string createdDate = GetValueOrNullForString(row, "columnDateCreated");
+                string updatedDate = GetValueOrNullForString(row, "columnDateUpdated");
+                if (string.IsNullOrEmpty(createdDate))
+                {
+                    createdDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime inputVal = Convert.ToDateTime(createdDate);
+                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                }
+                if (string.IsNullOrEmpty(updatedDate))
+                {
+                    updatedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime inputVal = Convert.ToDateTime(updatedDate);
+                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                }
+
+                createdDate = utils.ValidateDate(createdDate);
+                updatedDate = utils.ValidateDate(updatedDate);
+
+                accountsInfo.CreatedDate = createdDate;
+                accountsInfo.UpdatedDate = updatedDate;
+
                 accountsInfo.Details = GetValueOrNullForString(row, "columnDetails");
                 accountsInfo.Tag = GetValueOrNullForString(row, "columnTag");
-                accountsInfoColl.Add(accountsInfo);
+                if (!(string.IsNullOrEmpty(accountsInfo.ProjectName) || string.IsNullOrEmpty(accountsInfo.Particulars)))
+                {
+                    accountsInfoColl.Add(accountsInfo);
+                }
+                else
+                {
+                    log.Info("Record skipped.");
+                    MessageBox.Show("Row has empty ProjectName or Particulars. This row will not be inserted. Remaining will be processed. Press OK to continue.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             var accInfoEmptyData = accountsInfoColl.Where(acc => string.IsNullOrEmpty(acc.ProjectName) || string.IsNullOrEmpty(acc.Particulars));
             if (!(accInfoEmptyData == null || accInfoEmptyData.ToList().Count.Equals(0)))
@@ -58,7 +99,7 @@ namespace NTechAdviser.Forms
                 {
                     try
                     {
-                        utils.ExecuteAddAccountsData(accInfo.ProjectName, accInfo.Particulars, accInfo.PayMode, accInfo.BankDetails, accInfo.PayModeReference, accInfo.Debit, accInfo.Credit, accInfo.PendingDebit, accInfo.PendingCredit, accInfo.Details, accInfo.Tag);
+                        utils.ExecuteAddAccountsData(accInfo.ProjectName, accInfo.Particulars, accInfo.PayMode, accInfo.BankDetails, accInfo.PayModeReference, accInfo.Debit, accInfo.Credit, accInfo.PendingDebit, accInfo.PendingCredit, accInfo.CreatedBy, accInfo.UpdatedBy, accInfo.Details, accInfo.Tag, accInfo.CreatedDate, accInfo.UpdatedDate);
                         i++;
                     }
                     catch (Exception ex)

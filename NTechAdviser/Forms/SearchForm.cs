@@ -114,6 +114,7 @@ namespace NTechAdviser.Forms
             accountsInfo.PayModeReference = GetValueOrNullForString(row, "PayModeReference");
             accountsInfo.Debit = GetValueOrNullForDecimal(row, "Debit");
             accountsInfo.Credit = GetValueOrNullForDecimal(row, "Credit");
+            //This goes to CreditDebit info form.
             //accountsInfo.PendingDebit = GetValueOrNullForDecimal(row, "PendingDebit");
             //accountsInfo.PendingCredit = GetValueOrNullForDecimal(row, "PendingCredit");
             accountsInfo.Details = GetValueOrNullForString(row, "Details");
@@ -293,14 +294,15 @@ namespace NTechAdviser.Forms
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.Credit + "</td>");
                     }
-                    else if (str.Equals("PendingDebit", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.PendingDebit + "</td>");
-                    }
-                    else if (str.Equals("PendingCredit", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.PendingCredit + "</td>");
-                    }
+                    //Do not display this in the SearchForm. It will come in CreditDebit form.
+                    //else if (str.Equals("PendingDebit", StringComparison.InvariantCultureIgnoreCase))
+                    //{
+                    //    rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.PendingDebit + "</td>");
+                    //}
+                    //else if (str.Equals("PendingCredit", StringComparison.InvariantCultureIgnoreCase))
+                    //{
+                    //    rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.PendingCredit + "</td>");
+                    //}
                     else if (str.Equals("Details", StringComparison.InvariantCultureIgnoreCase))
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.Details + "</td>");
@@ -309,10 +311,11 @@ namespace NTechAdviser.Forms
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.Tag + "</td>");
                     }
-                    else if (str.Equals("StockCargoID", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.StockCargoID + "</td>");
-                    }
+                    //Not required any more.
+                    //else if (str.Equals("StockCargoID", StringComparison.InvariantCultureIgnoreCase))
+                    //{
+                    //    rowString = rowString + ("<td id=\"" + str + "\">" + accInfo.StockCargoID + "</td>");
+                    //}
                 }
                 tableCellsForBody.Add("<tr>" + rowString + "</tr>");
             }

@@ -47,6 +47,14 @@ namespace NTechAdviser.Forms
         public string Item
         { get; set; }
 
+        /// <summary>
+        /// Gets or sets the size of the item.
+        /// </summary>
+        /// <value>
+        /// The size of the item.
+        /// </value>
+        public string ItemSize
+        { get; set; }
 
         /// <summary>
         /// Gets or sets the units.
@@ -210,6 +218,7 @@ namespace NTechAdviser.Forms
             ProjectName = string.Empty;
             Particulars = string.Empty;
             Item = string.Empty;
+            ItemSize = string.Empty;
             UnitsIn = 0;
             UnitsOut = 0;
             SlipNo = string.Empty;

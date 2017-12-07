@@ -11,6 +11,7 @@ namespace NTechAdviser.Forms
 {
     public partial class StockForm : Form
     {
+        log4net.ILog log = log4net.LogManager.GetLogger(typeof(StockForm));
         public StockForm()
         {
             InitializeComponent();
@@ -42,9 +43,51 @@ namespace NTechAdviser.Forms
                 stockInfo.SlipNo = GetValueOrNullForString(row, "columnSlipNo");
                 stockInfo.InwardBillNo = GetValueOrNullForString(row, "columnInwardBillNo");
                 stockInfo.Volume = GetValueOrNullForString(row, "columnVolume");
+                stockInfo.ItemSize = GetValueOrNullForString(row, "columnItemSize");
+
+                //CreatedDate and UpdatedDate.
+                string createdDate = GetValueOrNullForString(row, "columnDateCreated");
+                string updatedDate = GetValueOrNullForString(row, "columnDateUpdated");
+                if (string.IsNullOrEmpty(createdDate))
+                {
+                    createdDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime inputVal = Convert.ToDateTime(createdDate);
+                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                }
+                if (string.IsNullOrEmpty(updatedDate))
+                {
+                    updatedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime inputVal = Convert.ToDateTime(updatedDate);
+                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                }
+
+                createdDate = utils.ValidateDate(createdDate);
+                updatedDate = utils.ValidateDate(updatedDate);
+
+                stockInfo.DateCreated = createdDate;
+                stockInfo.DateUpdated = updatedDate;
+
+                stockInfo.CreatedBy = ApplicationContext.UserName;
+                stockInfo.UpdatedBy = ApplicationContext.UserName;
+
                 stockInfo.Details = GetValueOrNullForString(row, "columnDetails");
                 stockInfo.Tag = GetValueOrNullForString(row, "columnTag");
-                stockInfoColl.Add(stockInfo);
+
+                if (!(string.IsNullOrEmpty(stockInfo.ProjectName) || string.IsNullOrEmpty(stockInfo.Particulars)))
+                {
+                    stockInfoColl.Add(stockInfo);
+                }
+                else
+                {
+                    log.Info("Record skipped.");
+                    MessageBox.Show("Row has empty ProjectName or Particulars. This row will not be added. Remaining will be processed. Press OK to continue.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             var stockInfoEmptyData = stockInfoColl.Where(acc => string.IsNullOrEmpty(acc.ProjectName) || string.IsNullOrEmpty(acc.Particulars));
             if (!(stockInfoEmptyData == null || stockInfoEmptyData.ToList().Count.Equals(0)))
@@ -54,18 +97,38 @@ namespace NTechAdviser.Forms
             }
 
             int i = 0;
-            foreach (StockInfo accInfo in stockInfoColl)
+            foreach (StockInfo stockInfo in stockInfoColl)
             {
-                if (!(string.IsNullOrEmpty(accInfo.ProjectName) || string.IsNullOrEmpty(accInfo.Particulars)))
+                if (!(string.IsNullOrEmpty(stockInfo.ProjectName) || string.IsNullOrEmpty(stockInfo.Particulars)))
                 {
                     try
                     {
-                        utils.ExecuteAddStockData(accInfo.ProjectName, accInfo.Particulars, accInfo.PayMode, accInfo.BankDetails, accInfo.PayModeReference, accInfo.SlipNo, accInfo.InwardBillNo, accInfo.Volume, accInfo.Debit, accInfo.Credit, accInfo.Item, accInfo.UnitsIn, accInfo.UnitsOut, accInfo.VehicleNo, accInfo.Details, accInfo.Tag);
+                        utils.ExecuteAddStockData(stockInfo.ProjectName,
+                            stockInfo.Particulars,
+                            stockInfo.PayMode,
+                            stockInfo.BankDetails,
+                            stockInfo.PayModeReference,
+                            stockInfo.SlipNo,
+                            stockInfo.InwardBillNo,
+                            stockInfo.Volume,
+                            stockInfo.Debit,
+                            stockInfo.Credit,
+                            stockInfo.Item,
+                            stockInfo.UnitsIn,
+                            stockInfo.UnitsOut,
+                            stockInfo.ItemSize,
+                            stockInfo.VehicleNo,
+                            stockInfo.Details,
+                            stockInfo.Tag,
+                            stockInfo.CreatedBy,
+                            stockInfo.UpdatedBy,
+                            stockInfo.DateCreated,
+                            stockInfo.DateUpdated);
                         i++;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(string.Format("Problem with adding record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", accInfo.ProjectName, accInfo.Particulars, accInfo.PayMode, accInfo.PayModeReference), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(string.Format("Problem with adding record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", stockInfo.ProjectName, stockInfo.Particulars, stockInfo.PayMode, stockInfo.PayModeReference), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

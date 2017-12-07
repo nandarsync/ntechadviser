@@ -40,24 +40,28 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAddData = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.columnProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnPaymode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnBankDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnPayModeReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnPendingDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnPendingCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStripAddData = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPaymode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPendingDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPendingCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnBankDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPayModeReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDateUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStripAddData.SuspendLayout();
@@ -102,19 +106,54 @@
             this.columnProject,
             this.columnParticulars,
             this.columnPaymode,
-            this.columnBankDetails,
-            this.columnPayModeReference,
             this.columnDebit,
             this.columnCredit,
             this.columnPendingDebit,
             this.columnPendingCredit,
+            this.columnBankDetails,
+            this.columnPayModeReference,
             this.columnDetails,
-            this.columnTag});
+            this.columnTag,
+            this.columnDateCreated,
+            this.columnDateUpdated});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 24);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(949, 432);
             this.dataGridView1.TabIndex = 1;
+            // 
+            // menuStripAddData
+            // 
+            this.menuStripAddData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStripAddData.Location = new System.Drawing.Point(0, 0);
+            this.menuStripAddData.Name = "menuStripAddData";
+            this.menuStripAddData.Size = new System.Drawing.Size(949, 24);
+            this.menuStripAddData.TabIndex = 2;
+            this.menuStripAddData.Text = "menuStrip1";
+            this.menuStripAddData.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStripAddData_ItemClicked);
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addDataToolStripMenuItem,
+            this.closeToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // addDataToolStripMenuItem
+            // 
+            this.addDataToolStripMenuItem.Name = "addDataToolStripMenuItem";
+            this.addDataToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.addDataToolStripMenuItem.Text = "Add Data";
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // columnProject
             // 
@@ -150,65 +189,65 @@
             this.columnPaymode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.columnPaymode.Width = 150;
             // 
-            // columnBankDetails
-            // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnBankDetails.DefaultCellStyle = dataGridViewCellStyle5;
-            this.columnBankDetails.HeaderText = "Bank Details";
-            this.columnBankDetails.Name = "columnBankDetails";
-            // 
-            // columnPayModeReference
-            // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnPayModeReference.DefaultCellStyle = dataGridViewCellStyle6;
-            this.columnPayModeReference.HeaderText = "Payment Reference";
-            this.columnPayModeReference.MinimumWidth = 200;
-            this.columnPayModeReference.Name = "columnPayModeReference";
-            this.columnPayModeReference.Width = 200;
-            // 
             // columnDebit
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = "0";
-            this.columnDebit.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.columnDebit.DefaultCellStyle = dataGridViewCellStyle5;
             this.columnDebit.HeaderText = "Debit";
             this.columnDebit.MinimumWidth = 100;
             this.columnDebit.Name = "columnDebit";
             // 
             // columnCredit
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = "0";
-            this.columnCredit.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = "0";
+            this.columnCredit.DefaultCellStyle = dataGridViewCellStyle6;
             this.columnCredit.HeaderText = "Credit";
             this.columnCredit.MinimumWidth = 100;
             this.columnCredit.Name = "columnCredit";
             // 
             // columnPendingDebit
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = "0";
-            this.columnPendingDebit.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = "0";
+            this.columnPendingDebit.DefaultCellStyle = dataGridViewCellStyle7;
             this.columnPendingDebit.HeaderText = "Pending Debit";
             this.columnPendingDebit.MinimumWidth = 100;
             this.columnPendingDebit.Name = "columnPendingDebit";
             // 
             // columnPendingCredit
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = "0";
-            this.columnPendingCredit.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = "0";
+            this.columnPendingCredit.DefaultCellStyle = dataGridViewCellStyle8;
             this.columnPendingCredit.HeaderText = "Pending Credit";
             this.columnPendingCredit.MinimumWidth = 100;
             this.columnPendingCredit.Name = "columnPendingCredit";
+            // 
+            // columnBankDetails
+            // 
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnBankDetails.DefaultCellStyle = dataGridViewCellStyle9;
+            this.columnBankDetails.HeaderText = "Bank Details";
+            this.columnBankDetails.Name = "columnBankDetails";
+            // 
+            // columnPayModeReference
+            // 
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnPayModeReference.DefaultCellStyle = dataGridViewCellStyle10;
+            this.columnPayModeReference.HeaderText = "Payment Reference";
+            this.columnPayModeReference.MinimumWidth = 200;
+            this.columnPayModeReference.Name = "columnPayModeReference";
+            this.columnPayModeReference.Width = 200;
             // 
             // columnDetails
             // 
@@ -226,38 +265,19 @@
             this.columnTag.MinimumWidth = 100;
             this.columnTag.Name = "columnTag";
             // 
-            // menuStripAddData
+            // columnDateCreated
             // 
-            this.menuStripAddData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStripAddData.Location = new System.Drawing.Point(0, 0);
-            this.menuStripAddData.Name = "menuStripAddData";
-            this.menuStripAddData.Size = new System.Drawing.Size(949, 24);
-            this.menuStripAddData.TabIndex = 2;
-            this.menuStripAddData.Text = "menuStrip1";
-            this.menuStripAddData.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStripAddData_ItemClicked);
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnDateCreated.DefaultCellStyle = dataGridViewCellStyle13;
+            this.columnDateCreated.HeaderText = "Date Created";
+            this.columnDateCreated.Name = "columnDateCreated";
             // 
-            // fileToolStripMenuItem
+            // columnDateUpdated
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addDataToolStripMenuItem,
-            this.closeToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // addDataToolStripMenuItem
-            // 
-            this.addDataToolStripMenuItem.Name = "addDataToolStripMenuItem";
-            this.addDataToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.addDataToolStripMenuItem.Text = "Add Data";
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnDateUpdated.DefaultCellStyle = dataGridViewCellStyle14;
+            this.columnDateUpdated.HeaderText = "Date Updated";
+            this.columnDateUpdated.Name = "columnDateUpdated";
             // 
             // StockAddForm
             // 
@@ -289,17 +309,19 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.Button btnAddData;
+        private System.Windows.Forms.ToolStripMenuItem addDataToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnParticulars;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPaymode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnBankDetails;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPayModeReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDebit;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCredit;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPendingDebit;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPendingCredit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnBankDetails;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPayModeReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTag;
-        private System.Windows.Forms.ToolStripMenuItem addDataToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateCreated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateUpdated;
     }
 }

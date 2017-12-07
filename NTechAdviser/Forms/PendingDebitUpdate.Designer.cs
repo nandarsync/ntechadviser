@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblProject = new System.Windows.Forms.Label();
             this.lblParticular = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.datePickerDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnSearchAll = new System.Windows.Forms.Button();
             this.txtBoxCredit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -101,7 +103,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(1003, 12);
+            this.btnAdd.Location = new System.Drawing.Point(987, 12);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 30);
             this.btnAdd.TabIndex = 5;
@@ -111,6 +113,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.datePickerDate);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.btnSearchAll);
             this.panel1.Controls.Add(this.txtBoxCredit);
             this.panel1.Controls.Add(this.label1);
@@ -127,13 +131,31 @@
             this.panel1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1120, 183);
+            this.panel1.Size = new System.Drawing.Size(1104, 183);
             this.panel1.TabIndex = 4;
+            // 
+            // datePickerDate
+            // 
+            this.datePickerDate.Location = new System.Drawing.Point(113, 139);
+            this.datePickerDate.Name = "datePickerDate";
+            this.datePickerDate.Size = new System.Drawing.Size(373, 26);
+            this.datePickerDate.TabIndex = 11;
+            this.datePickerDate.Value = new System.DateTime(2017, 12, 7, 17, 24, 44, 0);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(30, 145);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 18);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Date";
             // 
             // btnSearchAll
             // 
             this.btnSearchAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearchAll.Location = new System.Drawing.Point(1003, 96);
+            this.btnSearchAll.Location = new System.Drawing.Point(987, 96);
             this.btnSearchAll.Name = "btnSearchAll";
             this.btnSearchAll.Size = new System.Drawing.Size(90, 30);
             this.btnSearchAll.TabIndex = 7;
@@ -143,18 +165,18 @@
             // 
             // txtBoxCredit
             // 
-            this.txtBoxCredit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBoxCredit.Location = new System.Drawing.Point(113, 140);
+            this.txtBoxCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBoxCredit.Location = new System.Drawing.Point(645, 99);
             this.txtBoxCredit.Name = "txtBoxCredit";
-            this.txtBoxCredit.Size = new System.Drawing.Size(862, 26);
+            this.txtBoxCredit.Size = new System.Drawing.Size(314, 26);
             this.txtBoxCredit.TabIndex = 4;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 143);
+            this.label1.Location = new System.Drawing.Point(563, 102);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 18);
             this.label1.TabIndex = 9;
@@ -163,7 +185,7 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Location = new System.Drawing.Point(1003, 137);
+            this.btnPrint.Location = new System.Drawing.Point(987, 137);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(90, 30);
             this.btnPrint.TabIndex = 8;
@@ -173,11 +195,9 @@
             // 
             // txtBoxDebit
             // 
-            this.txtBoxDebit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxDebit.Location = new System.Drawing.Point(113, 99);
             this.txtBoxDebit.Name = "txtBoxDebit";
-            this.txtBoxDebit.Size = new System.Drawing.Size(862, 26);
+            this.txtBoxDebit.Size = new System.Drawing.Size(373, 26);
             this.txtBoxDebit.TabIndex = 3;
             // 
             // txtBoxParticular
@@ -186,7 +206,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxParticular.Location = new System.Drawing.Point(113, 57);
             this.txtBoxParticular.Name = "txtBoxParticular";
-            this.txtBoxParticular.Size = new System.Drawing.Size(862, 26);
+            this.txtBoxParticular.Size = new System.Drawing.Size(846, 26);
             this.txtBoxParticular.TabIndex = 2;
             // 
             // txtBoxProject
@@ -195,13 +215,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxProject.Location = new System.Drawing.Point(113, 15);
             this.txtBoxProject.Name = "txtBoxProject";
-            this.txtBoxProject.Size = new System.Drawing.Size(862, 26);
+            this.txtBoxProject.Size = new System.Drawing.Size(846, 26);
             this.txtBoxProject.TabIndex = 1;
             // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(1003, 54);
+            this.btnSearch.Location = new System.Drawing.Point(987, 54);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(90, 30);
             this.btnSearch.TabIndex = 6;
@@ -216,7 +236,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 207);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1120, 241);
+            this.panel2.Size = new System.Drawing.Size(1104, 315);
             this.panel2.TabIndex = 5;
             // 
             // panelPendingView
@@ -234,16 +254,16 @@
             this.panelPendingView.Controls.Add(this.txtBoxAmtToGive);
             this.panelPendingView.Controls.Add(this.lblOverallSum);
             this.panelPendingView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelPendingView.Location = new System.Drawing.Point(0, 144);
+            this.panelPendingView.Location = new System.Drawing.Point(0, 218);
             this.panelPendingView.Name = "panelPendingView";
-            this.panelPendingView.Size = new System.Drawing.Size(1120, 97);
+            this.panelPendingView.Size = new System.Drawing.Size(1104, 97);
             this.panelPendingView.TabIndex = 1;
             // 
             // txtBoxCredittedAmount
             // 
             this.txtBoxCredittedAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxCredittedAmount.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxCredittedAmount.Location = new System.Drawing.Point(529, 54);
+            this.txtBoxCredittedAmount.Location = new System.Drawing.Point(513, 54);
             this.txtBoxCredittedAmount.Name = "txtBoxCredittedAmount";
             this.txtBoxCredittedAmount.Size = new System.Drawing.Size(201, 26);
             this.txtBoxCredittedAmount.TabIndex = 12;
@@ -253,7 +273,7 @@
             this.lblCreditedAmt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCreditedAmt.AutoSize = true;
             this.lblCreditedAmt.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditedAmt.Location = new System.Drawing.Point(399, 57);
+            this.lblCreditedAmt.Location = new System.Drawing.Point(383, 57);
             this.lblCreditedAmt.Name = "lblCreditedAmt";
             this.lblCreditedAmt.Size = new System.Drawing.Size(115, 18);
             this.lblCreditedAmt.TabIndex = 10;
@@ -263,7 +283,7 @@
             // 
             this.txtBoxAmountToGet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxAmountToGet.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxAmountToGet.Location = new System.Drawing.Point(160, 54);
+            this.txtBoxAmountToGet.Location = new System.Drawing.Point(144, 54);
             this.txtBoxAmountToGet.Name = "txtBoxAmountToGet";
             this.txtBoxAmountToGet.Size = new System.Drawing.Size(201, 26);
             this.txtBoxAmountToGet.TabIndex = 10;
@@ -273,7 +293,7 @@
             this.lalAmtToGet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lalAmtToGet.AutoSize = true;
             this.lalAmtToGet.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lalAmtToGet.Location = new System.Drawing.Point(31, 57);
+            this.lalAmtToGet.Location = new System.Drawing.Point(15, 57);
             this.lalAmtToGet.Name = "lalAmtToGet";
             this.lalAmtToGet.Size = new System.Drawing.Size(100, 18);
             this.lalAmtToGet.TabIndex = 8;
@@ -284,7 +304,7 @@
             this.txtBoxPendingCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxPendingCredit.Enabled = false;
             this.txtBoxPendingCredit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPendingCredit.Location = new System.Drawing.Point(885, 54);
+            this.txtBoxPendingCredit.Location = new System.Drawing.Point(869, 54);
             this.txtBoxPendingCredit.Name = "txtBoxPendingCredit";
             this.txtBoxPendingCredit.Size = new System.Drawing.Size(201, 26);
             this.txtBoxPendingCredit.TabIndex = 14;
@@ -294,7 +314,7 @@
             this.lblPendingCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPendingCredit.AutoSize = true;
             this.lblPendingCredit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPendingCredit.Location = new System.Drawing.Point(756, 57);
+            this.lblPendingCredit.Location = new System.Drawing.Point(740, 57);
             this.lblPendingCredit.Name = "lblPendingCredit";
             this.lblPendingCredit.Size = new System.Drawing.Size(100, 18);
             this.lblPendingCredit.TabIndex = 6;
@@ -305,7 +325,7 @@
             this.txtBoxPendingAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxPendingAmount.Enabled = false;
             this.txtBoxPendingAmount.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPendingAmount.Location = new System.Drawing.Point(885, 18);
+            this.txtBoxPendingAmount.Location = new System.Drawing.Point(869, 18);
             this.txtBoxPendingAmount.Name = "txtBoxPendingAmount";
             this.txtBoxPendingAmount.Size = new System.Drawing.Size(201, 26);
             this.txtBoxPendingAmount.TabIndex = 13;
@@ -315,7 +335,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(756, 21);
+            this.label2.Location = new System.Drawing.Point(740, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 18);
             this.label2.TabIndex = 4;
@@ -325,7 +345,7 @@
             // 
             this.txtBoxDebittedAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxDebittedAmount.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDebittedAmount.Location = new System.Drawing.Point(529, 18);
+            this.txtBoxDebittedAmount.Location = new System.Drawing.Point(513, 18);
             this.txtBoxDebittedAmount.Name = "txtBoxDebittedAmount";
             this.txtBoxDebittedAmount.Size = new System.Drawing.Size(201, 26);
             this.txtBoxDebittedAmount.TabIndex = 11;
@@ -335,7 +355,7 @@
             this.lblAmtGiven.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmtGiven.AutoSize = true;
             this.lblAmtGiven.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmtGiven.Location = new System.Drawing.Point(399, 21);
+            this.lblAmtGiven.Location = new System.Drawing.Point(383, 21);
             this.lblAmtGiven.Name = "lblAmtGiven";
             this.lblAmtGiven.Size = new System.Drawing.Size(116, 18);
             this.lblAmtGiven.TabIndex = 2;
@@ -345,7 +365,7 @@
             // 
             this.txtBoxAmtToGive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxAmtToGive.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxAmtToGive.Location = new System.Drawing.Point(160, 18);
+            this.txtBoxAmtToGive.Location = new System.Drawing.Point(144, 18);
             this.txtBoxAmtToGive.Name = "txtBoxAmtToGive";
             this.txtBoxAmtToGive.Size = new System.Drawing.Size(201, 26);
             this.txtBoxAmtToGive.TabIndex = 9;
@@ -355,7 +375,7 @@
             this.lblOverallSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverallSum.AutoSize = true;
             this.lblOverallSum.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOverallSum.Location = new System.Drawing.Point(31, 21);
+            this.lblOverallSum.Location = new System.Drawing.Point(15, 21);
             this.lblOverallSum.Name = "lblOverallSum";
             this.lblOverallSum.Size = new System.Drawing.Size(106, 18);
             this.lblOverallSum.TabIndex = 0;
@@ -366,26 +386,26 @@
             this.dataGridViewDebitReview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDebitReview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDebitReview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewDebitReview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewDebitReview.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewDebitReview.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewDebitReview.Location = new System.Drawing.Point(3, 6);
             this.dataGridViewDebitReview.Name = "dataGridViewDebitReview";
-            this.dataGridViewDebitReview.Size = new System.Drawing.Size(1114, 138);
+            this.dataGridViewDebitReview.Size = new System.Drawing.Size(1098, 212);
             this.dataGridViewDebitReview.TabIndex = 0;
             this.dataGridViewDebitReview.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDebitReview_CellEndEdit);
             // 
@@ -396,7 +416,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1120, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -417,10 +437,9 @@
             // 
             // PendingDebitUpdate
             // 
-            this.AcceptButton = this.btnSearchAll;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1120, 448);
+            this.ClientSize = new System.Drawing.Size(1104, 522);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -475,5 +494,7 @@
         private System.Windows.Forms.TextBox txtBoxAmountToGet;
         private System.Windows.Forms.Label lalAmtToGet;
         private System.Windows.Forms.Button btnSearchAll;
+        private System.Windows.Forms.DateTimePicker datePickerDate;
+        private System.Windows.Forms.Label label4;
     }
 }

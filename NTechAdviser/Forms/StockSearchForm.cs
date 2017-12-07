@@ -79,14 +79,15 @@ namespace NTechAdviser.Forms
             stockInfo.RecordID = GetValueOrNullForInt(row, "RecordID");
             stockInfo.CreatedBy = GetValueOrNullForString(row, "CreatedBy");
             stockInfo.UpdatedBy = GetValueOrNullForString(row, "UpdatedBy");
-            stockInfo.DateCreated = GetValueOrNullForString(row, "DateCreated").TrimEnd("00:00:00".ToCharArray()).Trim();
-            stockInfo.DateUpdated = GetValueOrNullForString(row, "DateUpdated").TrimEnd("00:00:00".ToCharArray()).Trim();
+            stockInfo.DateCreated = GetValueOrNullForString(row, "DateCreated");
+            stockInfo.DateUpdated = GetValueOrNullForString(row, "DateUpdated");
             stockInfo.ProjectName = GetValueOrNullForString(row, "Project");
             stockInfo.Particulars = GetValueOrNullForString(row, "Particulars");
             stockInfo.SlipNo = GetValueOrNullForString(row, "SlipNo");
             stockInfo.InwardBillNo = GetValueOrNullForString(row, "InwardBillNo");
             stockInfo.Volume = GetValueOrNullForString(row, "Volume");
             stockInfo.Item = GetValueOrNullForString(row, "Item");
+            stockInfo.ItemSize = GetValueOrNullForString(row, "ItemSize");
             stockInfo.UnitsIn = GetValueOrNullForDecimal(row, "UnitsIn");
             stockInfo.UnitsOut = GetValueOrNullForDecimal(row, "UnitsOut");
             stockInfo.VehicleNo = GetValueOrNullForString(row, "VehicleNo");
@@ -251,6 +252,10 @@ namespace NTechAdviser.Forms
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.Item + "</td>");
                     }
+                    else if (str.Equals("ItemSize", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.ItemSize + "</td>");
+                    }
                     else if (str.Equals("UnitsIn", StringComparison.InvariantCultureIgnoreCase))
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.UnitsIn + "</td>");
@@ -315,10 +320,12 @@ namespace NTechAdviser.Forms
                     {
                         rowString = rowString + ("<td id=\"" + str + "\">" + stockInfo.Tag + "</td>");
                     }
-                    else if (str.Equals("StockCargoID", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        rowString = rowString + ("<td id=\"" + str + "\">" + string.Empty + "</td>");
-                    }
+
+                    //Not required any more.
+                    //else if (str.Equals("StockCargoID", StringComparison.InvariantCultureIgnoreCase))
+                    //{
+                    //    rowString = rowString + ("<td id=\"" + str + "\">" + string.Empty + "</td>");
+                    //}
                 }
                 tableCellsForBody.Add("<tr>" + rowString + "</tr>");
             }
