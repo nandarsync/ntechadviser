@@ -45,8 +45,10 @@ namespace NTechAdviser.Forms
                 accountsInfo.UpdatedBy = ApplicationContext.UserName;
 
                 //CreatedDate and UpdatedDate.
+                //CreatedDate should come from entry.
                 string createdDate = GetValueOrNullForString(row, "columnDateCreated");
-                string updatedDate = GetValueOrNullForString(row, "columnDateUpdated");
+                //UpdatedDate should always be the current date.
+                string updatedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");//GetValueOrNullForString(row, "columnDateUpdated");
                 if (string.IsNullOrEmpty(createdDate))
                 {
                     createdDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
@@ -63,7 +65,7 @@ namespace NTechAdviser.Forms
                 else
                 {
                     DateTime inputVal = Convert.ToDateTime(updatedDate);
-                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                    updatedDate = inputVal.ToString("yyyy-MM-dd");
                 }
 
                 createdDate = utils.ValidateDate(createdDate);
@@ -92,6 +94,7 @@ namespace NTechAdviser.Forms
                     return;
             }
 
+            List<int> errorRecords = new List<int>();
             int i = 0;
             foreach (AccountsInfo accInfo in accountsInfoColl)
             {
@@ -105,15 +108,19 @@ namespace NTechAdviser.Forms
                     catch (Exception ex)
                     {
                         log.Info(string.Format("Problem with adding record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", accInfo.ProjectName, accInfo.Particulars, accInfo.PayMode, accInfo.PayModeReference));
-                        MessageBox.Show(string.Format("Problem with adding record with ProjectName {0}, Particulars {1}, PayMode {2}, PayModeReference {3}", accInfo.ProjectName, accInfo.Particulars, accInfo.PayMode, accInfo.PayModeReference), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        errorRecords.Add(i);                       
                     }
                 }
             }
 
-            if (i != 0)
+            if (errorRecords.Count <= 0)
             {
                 log.Info("All data added successfully.");
                 MessageBox.Show("All data added successfully.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Records with index {0} has failed. Remaining got updated.", string.Join(",", errorRecords)), "Add Data Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

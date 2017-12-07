@@ -1,0 +1,15 @@
+﻿DateCreated
+Project
+Particulars
+PayMode
+PayModeReference
+BankDetails
+Debit
+Credit
+UpdatedBy
+Details
+Tag
+RecordID
+CreatedBy
+DateUpdated
+

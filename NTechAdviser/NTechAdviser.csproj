@@ -63,6 +63,12 @@
     </Compile>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="BuildSearchQuery.cs" />
+    <Compile Include="Forms\ReferenceEntryForQuantityOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReferenceEntryForQuantityOut.Designer.cs">
+      <DependentUpon>ReferenceEntryForQuantityOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StockInfo.cs" />
     <Compile Include="Forms\AddDataForm.cs">
       <SubType>Form</SubType>
@@ -169,6 +175,9 @@
     <EmbeddedResource Include="Forms\AdminKeyForm.resx">
       <DependentUpon>AdminKeyForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReferenceEntryForQuantityOut.resx">
+      <DependentUpon>ReferenceEntryForQuantityOut.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UnlockKeyUpdate.resx">
       <DependentUpon>UnlockKeyUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +245,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="application.ico" />
+    <Content Include="accounts_info_column_order.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="creditdebit_info_column_order.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="stock_info_column_order.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Forms\unlockkey.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

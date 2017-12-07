@@ -37,17 +37,19 @@ namespace NTechAdviser.Forms
                 stockInfo.Debit = GetValueOrNullForDecimal(row, "columnDebit");
                 stockInfo.Credit = GetValueOrNullForDecimal(row, "columnCredit");
                 stockInfo.Item = GetValueOrNullForString(row, "columnItem");
-                stockInfo.UnitsIn = GetValueOrNullForDecimal(row, "columnUnitsIn");
-                stockInfo.UnitsOut = GetValueOrNullForDecimal(row, "columnUnitsOut");
+                stockInfo.QuantityIn = GetValueOrNullForDecimal(row, "columnQuantityIn");
+                stockInfo.QuantityOut = GetValueOrNullForDecimal(row, "columnQuantityOut");
                 stockInfo.VehicleNo = GetValueOrNullForString(row, "columnVehicleNo");
                 stockInfo.SlipNo = GetValueOrNullForString(row, "columnSlipNo");
                 stockInfo.InwardBillNo = GetValueOrNullForString(row, "columnInwardBillNo");
                 stockInfo.Volume = GetValueOrNullForString(row, "columnVolume");
                 stockInfo.ItemSize = GetValueOrNullForString(row, "columnItemSize");
+                stockInfo.Reference = GetValueOrNullForString(row, "columnReference");
 
                 //CreatedDate and UpdatedDate.
                 string createdDate = GetValueOrNullForString(row, "columnDateCreated");
-                string updatedDate = GetValueOrNullForString(row, "columnDateUpdated");
+                //UpdatedDate should not be user editable.
+                string updatedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");//GetValueOrNullForString(row, "columnDateUpdated");
                 if (string.IsNullOrEmpty(createdDate))
                 {
                     createdDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
@@ -64,7 +66,7 @@ namespace NTechAdviser.Forms
                 else
                 {
                     DateTime inputVal = Convert.ToDateTime(updatedDate);
-                    createdDate = inputVal.ToString("yyyy-MM-dd");
+                    updatedDate = inputVal.ToString("yyyy-MM-dd");
                 }
 
                 createdDate = utils.ValidateDate(createdDate);
@@ -79,6 +81,12 @@ namespace NTechAdviser.Forms
                 stockInfo.Details = GetValueOrNullForString(row, "columnDetails");
                 stockInfo.Tag = GetValueOrNullForString(row, "columnTag");
 
+                if (!(stockInfo.QuantityOut <= 0) && string.IsNullOrEmpty(stockInfo.Reference))
+                {
+                    log.Info("Record skipped.");
+                    MessageBox.Show("Row has a value for QuantityOut. But Reference information is missing. This row will not be added unless Reference is included. Remaining will be processed. Press OK to continue.", "Empty Project or Particular Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
                 if (!(string.IsNullOrEmpty(stockInfo.ProjectName) || string.IsNullOrEmpty(stockInfo.Particulars)))
                 {
                     stockInfoColl.Add(stockInfo);
@@ -86,7 +94,7 @@ namespace NTechAdviser.Forms
                 else
                 {
                     log.Info("Record skipped.");
-                    MessageBox.Show("Row has empty ProjectName or Particulars. This row will not be added. Remaining will be processed. Press OK to continue.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Row has empty ProjectName or Particulars. This row will not be added. Remaining will be processed. Press OK to continue.", "Empty Project or Particular Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             var stockInfoEmptyData = stockInfoColl.Where(acc => string.IsNullOrEmpty(acc.ProjectName) || string.IsNullOrEmpty(acc.Particulars));
@@ -114,8 +122,9 @@ namespace NTechAdviser.Forms
                             stockInfo.Debit,
                             stockInfo.Credit,
                             stockInfo.Item,
-                            stockInfo.UnitsIn,
-                            stockInfo.UnitsOut,
+                            stockInfo.QuantityIn,
+                            stockInfo.QuantityOut,
+                            stockInfo.Reference,
                             stockInfo.ItemSize,
                             stockInfo.VehicleNo,
                             stockInfo.Details,
@@ -156,6 +165,30 @@ namespace NTechAdviser.Forms
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgView = sender as DataGridView;
+            int rowIndex = e.RowIndex;
+            if (dgView.Columns[e.ColumnIndex].Name == "columnQuantityOut")
+            {
+                ReferenceEntryForQuantityOut refEntryForm = new ReferenceEntryForQuantityOut();
+                refEntryForm.ShowDialog();
+                if (refEntryForm.DialogResult == System.Windows.Forms.DialogResult.OK)
+                {
+                    DataGridViewRow dgRow = dgView.Rows[rowIndex];
+                    dgRow.Cells["columnReference"].Value = refEntryForm.ReferenceText;
+                }
+                else
+                {
+                    DataGridViewRow dgRow = dgView.Rows[rowIndex];
+                    if (dgRow.Cells["columnReference"].Value == null)
+                    {
+                        MessageBox.Show("Row has a value for QuantityOut. But Reference information is missing. This row will not be added unless Reference is included. Remaining will be processed. Press OK to continue.", "Empty Project or Particular Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
         }
     }
 }

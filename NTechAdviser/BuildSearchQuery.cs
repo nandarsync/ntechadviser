@@ -43,7 +43,7 @@ namespace NTechAdviser
 
                     i++;
                 }
-                retVal = templateString + aggregatedStr;
+                retVal = templateString + aggregatedStr + " order by DateCreated";
             }
 
             return retVal;

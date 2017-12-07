@@ -62,14 +62,39 @@ namespace NTechAdviser.Forms
             }
 
             retVal = utils.GetManagementInfoDataSet(query);
+
+            string[] columnsOrder = File.ReadAllLines("accounts_info_column_order.txt");
+            if (columnsOrder != null && columnsOrder.Length > 1)
+            {
+                try
+                {
+                    utils.SetColumnsOrder(retVal, columnsOrder);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Failed to order columns.", ex);
+                }
+            }
             return retVal;
         }
 
         private void btnSearchAll_Click(object sender, EventArgs e)
         {
-            string cmdString = "select * from accounts_info";
+            string cmdString = "select * from accounts_info order by DateCreated";
             Utilities utils = new Utilities();
             DataSet ds = utils.GetManagementInfoDataSet(cmdString);
+            string[] columnsOrder = File.ReadAllLines("accounts_info_column_order.txt");
+            if (columnsOrder != null && columnsOrder.Length > 1)
+            {
+                try
+                {
+                    utils.SetColumnsOrder(ds, columnsOrder);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Failed to order columns.", ex);
+                }
+            }
             this.dataGridViewSearch.DataSource = ds.Tables[0];
         }
 
@@ -106,7 +131,7 @@ namespace NTechAdviser.Forms
             accountsInfo.RecordID = GetValueOrNullForInt(row, "RecordID");
             accountsInfo.CreatedBy = GetValueOrNullForString(row, "CreatedBy");
             accountsInfo.UpdatedBy = GetValueOrNullForString(row, "UpdatedBy");
-            accountsInfo.UpdatedDate = GetValueOrNullForString(row, "DateUpdated").TrimEnd("00:00:00".ToCharArray()).Trim();
+            accountsInfo.UpdatedDate = GetValueOrNullForString(row, "DateUpdated");
             accountsInfo.ProjectName = GetValueOrNullForString(row, "Project");
             accountsInfo.Particulars = GetValueOrNullForString(row, "Particulars");
             accountsInfo.PayMode = GetValueOrNullForString(row, "PayMode");

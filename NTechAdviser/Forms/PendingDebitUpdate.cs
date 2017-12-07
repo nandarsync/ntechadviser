@@ -113,7 +113,7 @@ namespace NTechAdviser.Forms
                 }
                 else
                 {
-                    resultVal.Sort((x, y) => x.LastUpdatedDate.CompareTo(y.LastUpdatedDate));
+                    resultVal.Sort((x, y) => x.CreatedDate.CompareTo(y.CreatedDate));
                     SetupDataGridView();
                     dataGridViewDebitReview.DataSource = resultVal;
                     DoCalculation(resultVal);
@@ -422,7 +422,7 @@ namespace NTechAdviser.Forms
                 DataSet ds = utils.GetCreditDebitInfo();
                 List<CreditDebitInfo> creditDebitInfoColl = GetCreditDebitInfoColl(ds);
 
-                creditDebitInfoColl.Sort((x, y) => x.LastUpdatedDate.CompareTo(y.LastUpdatedDate));
+                creditDebitInfoColl.Sort((x, y) => x.CreatedDate.CompareTo(y.CreatedDate));
 
                 SetupDataGridView();
                 dataGridViewDebitReview.DataSource = creditDebitInfoColl;

@@ -52,23 +52,23 @@
             this.btnAddData = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.columnDateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSlipNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnInwardBillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnQuantityIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnQuantityOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnItemSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUnitsIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUnitsOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnVehicleNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPaymode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnBankDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPayModeReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDateUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
@@ -121,23 +121,23 @@
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeight = 42;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnDateCreated,
             this.columnProject,
             this.columnParticulars,
             this.columnItem,
             this.columnSlipNo,
             this.columnInwardBillNo,
             this.columnVolume,
+            this.columnQuantityIn,
+            this.columnQuantityOut,
             this.columnItemSize,
-            this.columnUnitsIn,
-            this.columnUnitsOut,
             this.columnVehicleNo,
+            this.columnReference,
             this.columnPaymode,
             this.columnBankDetails,
             this.columnPayModeReference,
             this.columnDebit,
             this.columnCredit,
-            this.columnDateCreated,
-            this.columnDateUpdated,
             this.columnDetails,
             this.columnTag});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -146,12 +146,20 @@
             this.dataGridView1.Size = new System.Drawing.Size(1028, 356);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
+            // columnDateCreated
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnDateCreated.DefaultCellStyle = dataGridViewCellStyle2;
+            this.columnDateCreated.HeaderText = "Date";
+            this.columnDateCreated.Name = "columnDateCreated";
             // 
             // columnProject
             // 
             this.columnProject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnProject.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnProject.DefaultCellStyle = dataGridViewCellStyle3;
             this.columnProject.HeaderText = "Project";
             this.columnProject.MinimumWidth = 200;
             this.columnProject.Name = "columnProject";
@@ -161,8 +169,8 @@
             // 
             // columnParticulars
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnParticulars.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnParticulars.DefaultCellStyle = dataGridViewCellStyle4;
             this.columnParticulars.HeaderText = "Particulars";
             this.columnParticulars.MinimumWidth = 200;
             this.columnParticulars.Name = "columnParticulars";
@@ -172,8 +180,8 @@
             // 
             // columnItem
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnItem.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnItem.DefaultCellStyle = dataGridViewCellStyle5;
             this.columnItem.HeaderText = "Item";
             this.columnItem.MinimumWidth = 100;
             this.columnItem.Name = "columnItem";
@@ -183,69 +191,76 @@
             // 
             // columnSlipNo
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnSlipNo.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnSlipNo.DefaultCellStyle = dataGridViewCellStyle6;
             this.columnSlipNo.HeaderText = "Slip No";
             this.columnSlipNo.Name = "columnSlipNo";
             // 
             // columnInwardBillNo
             // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnInwardBillNo.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnInwardBillNo.DefaultCellStyle = dataGridViewCellStyle7;
             this.columnInwardBillNo.HeaderText = "Inward Bill No";
             this.columnInwardBillNo.Name = "columnInwardBillNo";
             // 
             // columnVolume
             // 
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnVolume.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnVolume.DefaultCellStyle = dataGridViewCellStyle8;
             this.columnVolume.HeaderText = "Volume";
             this.columnVolume.Name = "columnVolume";
             // 
-            // columnItemSize
-            // 
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnItemSize.DefaultCellStyle = dataGridViewCellStyle8;
-            this.columnItemSize.HeaderText = "Item Size";
-            this.columnItemSize.Name = "columnItemSize";
-            // 
-            // columnUnitsIn
+            // columnQuantityIn
             // 
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle9.Format = "N2";
             dataGridViewCellStyle9.NullValue = "0";
-            this.columnUnitsIn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.columnUnitsIn.HeaderText = "Units In";
-            this.columnUnitsIn.MinimumWidth = 50;
-            this.columnUnitsIn.Name = "columnUnitsIn";
-            this.columnUnitsIn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnUnitsIn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnQuantityIn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.columnQuantityIn.HeaderText = "Quantity In";
+            this.columnQuantityIn.MinimumWidth = 50;
+            this.columnQuantityIn.Name = "columnQuantityIn";
+            this.columnQuantityIn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnQuantityIn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // columnUnitsOut
+            // columnQuantityOut
             // 
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle10.Format = "N2";
             dataGridViewCellStyle10.NullValue = "0";
-            this.columnUnitsOut.DefaultCellStyle = dataGridViewCellStyle10;
-            this.columnUnitsOut.HeaderText = "Units Out";
-            this.columnUnitsOut.MinimumWidth = 50;
-            this.columnUnitsOut.Name = "columnUnitsOut";
-            this.columnUnitsOut.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnUnitsOut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnQuantityOut.DefaultCellStyle = dataGridViewCellStyle10;
+            this.columnQuantityOut.HeaderText = "Quantity Out";
+            this.columnQuantityOut.MinimumWidth = 50;
+            this.columnQuantityOut.Name = "columnQuantityOut";
+            this.columnQuantityOut.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnQuantityOut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnItemSize
+            // 
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnItemSize.DefaultCellStyle = dataGridViewCellStyle11;
+            this.columnItemSize.HeaderText = "Item Size";
+            this.columnItemSize.Name = "columnItemSize";
             // 
             // columnVehicleNo
             // 
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnVehicleNo.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnVehicleNo.DefaultCellStyle = dataGridViewCellStyle12;
             this.columnVehicleNo.HeaderText = "Vehicle Number";
             this.columnVehicleNo.Name = "columnVehicleNo";
             // 
+            // columnReference
+            // 
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnReference.DefaultCellStyle = dataGridViewCellStyle13;
+            this.columnReference.HeaderText = "Reference";
+            this.columnReference.Name = "columnReference";
+            // 
             // columnPaymode
             // 
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnPaymode.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnPaymode.DefaultCellStyle = dataGridViewCellStyle14;
             this.columnPaymode.HeaderText = "Payment Mode";
             this.columnPaymode.MinimumWidth = 150;
             this.columnPaymode.Name = "columnPaymode";
@@ -255,15 +270,15 @@
             // 
             // columnBankDetails
             // 
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnBankDetails.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnBankDetails.DefaultCellStyle = dataGridViewCellStyle15;
             this.columnBankDetails.HeaderText = "Bank Details";
             this.columnBankDetails.Name = "columnBankDetails";
             // 
             // columnPayModeReference
             // 
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnPayModeReference.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnPayModeReference.DefaultCellStyle = dataGridViewCellStyle16;
             this.columnPayModeReference.HeaderText = "Payment Reference";
             this.columnPayModeReference.MinimumWidth = 200;
             this.columnPayModeReference.Name = "columnPayModeReference";
@@ -271,39 +286,25 @@
             // 
             // columnDebit
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.Format = "N2";
-            dataGridViewCellStyle15.NullValue = "0";
-            this.columnDebit.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.Format = "N2";
+            dataGridViewCellStyle17.NullValue = "0";
+            this.columnDebit.DefaultCellStyle = dataGridViewCellStyle17;
             this.columnDebit.HeaderText = "Debit";
             this.columnDebit.MinimumWidth = 100;
             this.columnDebit.Name = "columnDebit";
             // 
             // columnCredit
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = "0";
-            this.columnCredit.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.Format = "N2";
+            dataGridViewCellStyle18.NullValue = "0";
+            this.columnCredit.DefaultCellStyle = dataGridViewCellStyle18;
             this.columnCredit.HeaderText = "Credit";
             this.columnCredit.MinimumWidth = 100;
             this.columnCredit.Name = "columnCredit";
-            // 
-            // columnDateCreated
-            // 
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnDateCreated.DefaultCellStyle = dataGridViewCellStyle17;
-            this.columnDateCreated.HeaderText = "Date Created";
-            this.columnDateCreated.Name = "columnDateCreated";
-            // 
-            // columnDateUpdated
-            // 
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columnDateUpdated.DefaultCellStyle = dataGridViewCellStyle18;
-            this.columnDateUpdated.HeaderText = "Date Updated";
-            this.columnDateUpdated.Name = "columnDateUpdated";
             // 
             // columnDetails
             // 
@@ -346,23 +347,23 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnAddData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateCreated;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnParticulars;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSlipNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnInwardBillNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVolume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnQuantityIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnQuantityOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnItemSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitsIn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitsOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVehicleNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPaymode;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnBankDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPayModeReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDebit;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCredit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateCreated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateUpdated;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTag;
 
