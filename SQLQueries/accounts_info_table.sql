@@ -1,7 +1,7 @@
 USE [info_management]
 GO
 
-/****** Object:  Table [dbo].[accounts_info]    Script Date: 12/11/2017 16:43:43 ******/
+/****** Object:  Table [dbo].[accounts_info]    Script Date: 08/12/2017 00:22:32 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,9 +10,9 @@ GO
 
 CREATE TABLE [dbo].[accounts_info](
 	[RecordID] [bigint] IDENTITY(1,1) NOT NULL,
-	[DateCreated] [date] NOT NULL CONSTRAINT [DF_accounts_info_Date]  DEFAULT (sysdatetime()),
+	[DateCreated] [date] NOT NULL,
 	[CreatedBy] [nvarchar](50) NULL,
-	[DateUpdated] [date] NOT NULL CONSTRAINT [DF_accounts_info_DateUpdated]  DEFAULT (sysdatetime()),
+	[DateUpdated] [date] NOT NULL,
 	[UpdatedBy] [nvarchar](50) NULL,
 	[Project] [nvarchar](50) NULL,
 	[Particulars] [nvarchar](150) NULL,
@@ -21,11 +21,8 @@ CREATE TABLE [dbo].[accounts_info](
 	[BankDetails] [nvarchar](50) NULL,
 	[Debit] [money] NULL,
 	[Credit] [money] NULL,
-	[PendingDebit] [money] NULL,
-	[PendingCredit] [money] NULL,
 	[Details] [nvarchar](300) NULL,
 	[Tag] [nvarchar](300) NULL,
-	[StockCargoID] [bigint] NULL,
  CONSTRAINT [PK_accounts_info] PRIMARY KEY CLUSTERED 
 (
 	[RecordID] ASC
@@ -53,12 +50,6 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Debited money'
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Credited money' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'accounts_info', @level2type=N'COLUMN',@level2name=N'Credit'
-GO
-
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Pending amount' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'accounts_info', @level2type=N'COLUMN',@level2name=N'PendingDebit'
-GO
-
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Pending amount' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'accounts_info', @level2type=N'COLUMN',@level2name=N'PendingCredit'
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Any comments you have to remember anytime?' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'accounts_info', @level2type=N'COLUMN',@level2name=N'Details'

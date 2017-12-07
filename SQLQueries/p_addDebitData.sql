@@ -1,12 +1,13 @@
-USE [nandarte_ntechadviser]
+USE [info_management]
 GO
 
-/****** Object:  StoredProcedure [dbo].[p_addDebitData]    Script Date: 12/11/2017 16:47:18 ******/
+/****** Object:  StoredProcedure [dbo].[p_addDebitData]    Script Date: 08/12/2017 00:26:37 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 -- =============================================
@@ -20,6 +21,8 @@ CREATE PROCEDURE [dbo].[p_addDebitData]
 	@Particulars nvarchar(150),
 	@CreatedBy nvarchar(50),
 	@UpdatedBy nvarchar(50),
+	@DateCreated date,
+	@DateUpdated date,
 	@Credit money,
 	@Debit money,
 	@Details nvarchar(300),
@@ -27,9 +30,10 @@ CREATE PROCEDURE [dbo].[p_addDebitData]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	insert into credit_debit_info (Project, Particulars, CreatedBy, UpdatedBy, Debit, Credit, Details, Tag)
-	VALUES (@Project,@Particulars, @CreatedBy, @UpdatedBy, @Debit, @Credit, @Details, @Tag);
+	insert into credit_debit_info (Project, Particulars, CreatedBy, UpdatedBy, Debit, Credit, Details, Tag, DateCreated, DateUpdated)
+	VALUES (@Project,@Particulars, @CreatedBy, @UpdatedBy, @Debit, @Credit, @Details, @Tag, @DateCreated, @DateUpdated);
 END
+
 
 
 GO
